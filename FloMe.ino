@@ -11,21 +11,23 @@
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
+#include "password.h" 
 
-// Update these with values suitable for your network.
+// defined in password.h
+//const char* ssid = "xxxx";
+//const char* password = "xxxx";
 
-const char* ssid = "xxxx";
-const char* password = "xxxx";
+// These need to be configured for each installation
 //const char* mqtt_server = "iot.eclipse.org";
 // raspberrypi ip address
-const char* mqtt_server = "192.168.0.103";
+const char* mqtt_server = "192.168.0.106";
 const char* topic = "yard/water/flow2";
 const char* host_name = "flowmeter2";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-byte sensorPin    = D2; //D2 on esp8266, GPIO 4
+byte sensorPin    = D2; //D2 on esp12, GPIO 4
 
 // The hall-effect flow sensor outputs approximately 7.5 pulses per second per
 // litre/minute of flow or 450 pulses per liter, 1703.4 pulses per gallon
@@ -67,6 +69,7 @@ void setup()
 
 char message[20];
 
+// RAS need to investigate why flow is passed to this
 void reconnect(int flow) {
   // Loop until we're reconnected
   while (!client.connected()) {
