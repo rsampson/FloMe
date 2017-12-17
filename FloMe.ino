@@ -20,7 +20,7 @@
 // These need to be configured for each installation
 //const char* mqtt_server = "iot.eclipse.org";
 // raspberrypi ip address
-const char* mqtt_server = "192.168.0.106";
+const char* mqtt_server = "192.168.0.103";
 const char* topic = "yard/water/flow2";
 const char* host_name = "flowmeter2";
 
@@ -69,8 +69,7 @@ void setup()
 
 char message[20];
 
-// RAS need to investigate why flow is passed to this
-void reconnect(int flow) {
+void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
     //Serial.print("Attempting MQTT connection...");
@@ -106,7 +105,7 @@ void loop()
 
 
     if (!client.connected()) {
-      reconnect(pulseCount);
+      reconnect();
     }
     //client.loop();
     sprintf(message, "%d", pulseCount);   

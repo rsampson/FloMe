@@ -82,6 +82,7 @@ class TsDataManager:
 
     def __init__(self):
         self.ticks = 0
+        self.ticks = 0
         self.valve_on = False
 
     def accumulate(self, mess):
@@ -90,11 +91,8 @@ class TsDataManager:
             tic = int(mess.payload.decode("utf-8"))
             print(tic)
             self.ticks += tic
-            '''r = parse("b'{}'", str(mess.payload.decode("utf-8")))
-            self.ticks += int(r.fixed[0])
-            print(self.ticks)'''
         except  StandardError:
-             print('parse error {}'.format(r))
+             print('message decode error {}'.format(mess.payload.decode("utf-8")))
 
     def send(self):
         """COMPUTE GALLONS

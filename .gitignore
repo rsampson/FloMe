@@ -1,5 +1,5 @@
-env
+env/
 password.py
 password.h
 *.pyc
-.idea
+.idea/
